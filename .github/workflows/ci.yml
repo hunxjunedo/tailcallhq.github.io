@@ -35,10 +35,20 @@ jobs:
           npx prettier --check "**/*.{graphql,yml,json,md,sh,ts,tsx,js,css}"
           npm run build
 
-      - name: E2E Tests
-        uses: cypress-io/github-action@v3
+  - name: Start production server
+        run: |
+          docusaurus serve
+        env:
+          NODE_ENV: production
+          CI: true
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v4
         with:
-          project: ../../
+          wait-on: 'http://localhost:3000' 
+          wait-on-timeout: 60 
+          start: '' 
+          run: npx cypress run 
           browser: chrome
 
       - name: Deploy 🚀
