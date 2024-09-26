@@ -53,10 +53,10 @@ jobs:
       - name: Run Cypress tests
         uses: cypress-io/github-action@v4
         with:
-          wait-on: 'http://localhost:3000' 
-          wait-on-timeout: 60 
-          start: '' 
-          run: npx cypress run 
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 60
+          start: ""
+          run: npx cypress run
           browser: chrome
 
       - name: Stop the server
