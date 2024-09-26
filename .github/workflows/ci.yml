@@ -36,18 +36,33 @@ jobs:
           npm run build
 
       - name: Start production server
-        run: npm run serve
+        run: |
+          docusaurus serve & 
+          echo $! > server.pid
         env:
           NODE_ENV: production
           CI: true
 
+      - name: Wait for server to start
+        run: |
+          while ! curl -s http://localhost:3000 > /dev/null; do
+            echo "Waiting for server..."
+            sleep 1
+          done
+
       - name: Run Cypress tests
         uses: cypress-io/github-action@v4
         with:
-          wait-on: "http://localhost:3000"
-          wait-on-timeout: 60
-          start: ""
-          run: npx cypress run
+          wait-on: 'http://localhost:3000' 
+          wait-on-timeout: 60 
+          start: '' 
+          run: npx cypress run 
+          browser: chrome
+
+      - name: Stop the server
+        run: |
+          kill $(cat server.pid) || true 
+          rm server.pid # Clean up the PID file
 
       - name: Deploy 🚀
         if: github.ref == 'refs/heads/develop'
