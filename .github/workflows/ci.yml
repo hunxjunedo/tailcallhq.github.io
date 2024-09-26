@@ -37,7 +37,7 @@ jobs:
 
       - name: Start production server
         run: |
-          docusaurus serve & 
+          npm run serve & 
           echo $! > server.pid
         env:
           NODE_ENV: production
