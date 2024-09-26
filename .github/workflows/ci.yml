@@ -35,12 +35,12 @@ jobs:
           npx prettier --check "**/*.{graphql,yml,json,md,sh,ts,tsx,js,css}"
           npm run build
 
-      - name: E2E Tests  
+      - name: E2E Tests
         uses: cypress-io/github-action@v3
         with:
           project: ../../
           browser: chrome
-  
+
       - name: Deploy 🚀
         if: github.ref == 'refs/heads/develop'
         uses: JamesIves/github-pages-deploy-action@v4

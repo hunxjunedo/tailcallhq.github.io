@@ -9,7 +9,7 @@ import Testimonials from "./Testimonials"
 import Announcement from "../shared/Announcement"
 import IntroductionVideo from "./IntroductionVideo"
 const HomePage = (): JSX.Element => {
-  console.warn('hey')
+  console.warn("hey")
   return (
     <div className="">
       <Banner />
