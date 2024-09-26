@@ -36,7 +36,7 @@ jobs:
           npm run build
 
       - name: Start production server
-        run: docusaurus serve
+        run: npm run serve
         env:
           NODE_ENV: production
           CI: true
